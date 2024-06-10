@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RPX</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="background"></div>
+  <div class="topbar">
+    <div class="logo">
+      <img src="assets/rpx_logo1.png" alt="Logo" style="align-self: center;">
+      <a href="index.html" class="rpx-link">RPX</a>
+    </div>
+    <div class="links">
+      <a href="https://discord.gg/QmxRfmVvUy" target="_blank">Discord</a>
+      <a href="purchase.html">Purchase</a>
+      <a href="download.html">Download</a>
+    </div>
+  </div>
+  <div class="center">
+    <h2>#1 Executor</h2>
+
+  </div>
+  <div class="wrapper">
+    <div class="boxes"></div>
+  </div>
+  <audio id="music"></audio>
+  <script>
+    const playlist = [
+      'assets/bgm.mp3',
+    ];
+    let currentSongIndex = 0;
+
+    function play() {
+      const audioPlayer = document.getElementById('music');
+      audioPlayer.src = playlist[currentSongIndex];
+      audioPlayer.play();
+      currentSongIndex = (currentSongIndex + 1) % playlist.length;
+    }
+
+    document.getElementById('music').addEventListener('ended', play);
+
+    document.addEventListener('DOMContentLoaded', function () {
+      play();
+
+      const particleContainer = document.querySelector('.boxes');
+
+      const createParticle = () => {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * window.innerWidth + 'px';
+        particle.style.top = Math.random() * window.innerHeight + 'px';
+        particle.style.animationDuration = Math.random() * 10 + 11 + 's';
+        particleContainer.appendChild(particle);
+
+        particle.addEventListener('animationend', () => {
+          particle.remove();
+        });
+      };
+
+      const spawnParticles = () => {
+        setInterval(createParticle, 500);
+      };
+
+      spawnParticles();
+    });
+  </script>
+</body>
+
+</html>
